@@ -1,0 +1,21 @@
+$theme-colors: (
+    "primary": #0063a7,
+    "secondary": #fff,
+    "success": #19bd21,
+    "warning": #ffca2c,
+    "danger": #dc3545,
+    "info": #0dcaf0,
+    "light": rgb(214, 214, 214),
+    "dark": #242424,
+    
+);
+@import "~bootstrap/scss/bootstrap";
+@import "./variables"; // read var first
+@import "./mixins"; // read mixin second
+@import "./reset"; // read reset last
+@import "./typography";
+
+body {
+    font-family: $font
+
+}
