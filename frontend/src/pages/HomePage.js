@@ -1,9 +1,8 @@
-import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Product from '../components/Product';
 import products from '../data/products';
-function HomePage() {
+const HomePage = () => {
   return (
     <div>
       <h1>Latest Products</h1>

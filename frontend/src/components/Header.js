@@ -1,17 +1,18 @@
-import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { LinkContainer } from 'react-router-bootstrap';
 import logo from "../assets/logo.png";
-
 const Header = () => {
   return (
     <header>
       <Navbar bg="light" variant="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/"><img alt='vikrant rajan logo' src={ logo } /></Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand ><img alt='vikrant rajan logo' src={ logo } /></Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -19,9 +20,15 @@ const Header = () => {
               style={ { maxHeight: '100px' } }
               navbarScroll
             >
-              <Nav.Link href="/">Shop</Nav.Link>
+            <LinkContainer to="/">
+              <Nav.Link>Shop</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/cart">
               <Nav.Link className="ml-4" href="/cart"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/login">
               <Nav.Link className="ml-4" href="/login"><i className="fas fa-user"></i> Login</Nav.Link>
+            </LinkContainer>
 
                 
             </Nav>
