@@ -1,5 +1,5 @@
 import uuid from 'react-uuid';
-
+import '../styles/rating.scss';
 
 const calculateProductRating = (val, col, txt) => {
     let classnames = {}
@@ -23,7 +23,7 @@ const calculateProductRating = (val, col, txt) => {
 
     }
 
-    ratingStars.push(<p className='mt-1' key={uuid()}>{txt && txt}</p>)
+    ratingStars.push(<p className='reviews' key={uuid()}>{txt && txt}</p>)
     return ratingStars
 }
 
