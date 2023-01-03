@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
@@ -5,10 +7,22 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import { Link, useParams } from 'react-router-dom';
 import Rating from '../components/Rating';
-import products from '../data/products';
+
 const ProductPage = () => {
-    let { id } = useParams();
-    const product = products.find((p) => p._id === id)
+  
+  let { id } = useParams();
+  const [product, setProduct] = useState([]);
+  
+  const fetchProduct = async () => {
+    const {data} = await axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+    setProduct(data)
+  }
+
+    useEffect(() => {  fetchProduct() 
+      // eslint-disable-next-line 
+    }, [])
+
+
   return (
     <div>
       <Link to='/' className='btn btn-light my-3'>Go Back</Link>
