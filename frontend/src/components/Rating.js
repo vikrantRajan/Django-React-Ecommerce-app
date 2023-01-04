@@ -8,15 +8,13 @@ const calculateProductRating = (val, col, txt) => {
         if (val >= i) {
             classnames[i] = {cl: 'fas fa-star', co: col } 
         } 
-        else {
-            if (val >= i - 0.5) {
-                classnames[i-0.5] = {cl: 'fas fa-star-half-alt', co: col } 
-                
-            } else {
-                classnames[i-1] = {cl: 'fas fa-star', co: col }
-            }
+        else if (val >= i - 0.5) {
+            classnames[i-0.5] = {cl: 'fas fa-star-half-alt', co: col } 
+        } else {
+            classnames[i-1] = {cl: 'fas fa-star', co: col }
         }
     }
+    
     let ratingStars = []
     for (const [key, value] of Object.entries(classnames)) {
         ratingStars.push(<i style={{color: value.co}} className={value.cl} key={`${key}${uuid()}`}></i>)
