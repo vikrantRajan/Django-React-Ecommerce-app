@@ -10,10 +10,7 @@ const HomePage = () => {
   const {product, isLoading, isSuccess, isError, message} = useSelector((state) => state.product)
   useEffect(() => { dispatch(productFetch()) }, [dispatch])
   useEffect(() => {
-    if (isSuccess && product.data.length > 0) {
-      setProducts(() => (product.data))
-    }
-    
+    if (isSuccess && product.data.length > 0) setProducts(() => (product.data))
   }, [product, isLoading, isSuccess, isError, message]);
 
   return (
