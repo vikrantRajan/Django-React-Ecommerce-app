@@ -2,14 +2,17 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from './sagas/rootSaga';
 import authReducer from './slices/authSlice';
-import productReducer from './slices/productSlice';
+import productDetailsReducer from './slices/productDetailsSlice';
+import productListReducer from './slices/productListSlice';
 
 
 const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
     reducer: {
         auth: authReducer,
-        product: productReducer
+        productList: productListReducer,
+        productDetails: productDetailsReducer
+
     },
     middleware: [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware]
 })
