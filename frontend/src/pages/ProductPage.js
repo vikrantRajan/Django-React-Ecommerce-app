@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Rating from '../components/Rating';
+import { cartAddItem } from '../redux/slices/cartSlice';
 import { productDetailsFetch } from '../redux/slices/productDetailsSlice';
+import '../styles/productPage.scss';
 
 const ProductPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   let { id } = useParams();
   const [ product, setProduct ] = useState( [] );
+  const [ qty, setQty ] = useState( 1 );
   const productDetails = useSelector( ( state ) => state.productDetails )
   const { isError, isLoading, isSuccess } = productDetails
 
@@ -23,8 +28,13 @@ const ProductPage = () => {
     dispatch( productDetailsFetch( id ) )
     if ( isSuccess ) setProduct( productDetails.product.data )
 
-  }, [dispatch, isSuccess, isError, isLoading, productDetails.product.data, id] )
+  }, [ dispatch, isSuccess, isError, isLoading, productDetails.product.data, id ] )
 
+  const addToCartHandler = (prod, q) => {
+    let payload = {...prod, qty: q}
+    if (Number(id) === prod._id) dispatch(cartAddItem(payload))
+    navigate(`/cart/${id}?qty=${qty}`)
+  }
 
   return (
     <div>
@@ -49,11 +59,47 @@ const ProductPage = () => {
               <ListGroup.Item>
                 <p>{ product.description }</p>
               </ListGroup.Item>
-              { product.countInStock > 0 ? <Button className='btn-block bg-dark text-light mt-5' type='button'>Add To Cart</Button> : <ListGroup.Item className='py-3 text-center' variant="danger">
-                <Row>
-                  <Col className='text-danger'>Out Of Stock</Col>
-                </Row>
-              </ListGroup.Item> }
+              { product.countInStock > 0 ? ( 
+
+                  <ListGroup.Item>
+                    <Row>
+                      <Col className='shopping-cart'>
+                      {
+                        qty > 0 ? (
+                          <Button className='btn-block bg-dark text-light' type='button' onClick={e => addToCartHandler(product, qty)}>
+                            <i className="fas fa-shopping-cart"></i> 
+                          </Button> ) 
+                        : (
+                            <Button disabled className='btn-block bg-grey text-light' type='button' onClick={e => addToCartHandler(product, qty)}>
+                              <i className="fas fa-shopping-cart"></i> 
+                            </Button> 
+                          )
+                        
+                      }
+                        
+                      </Col>
+
+                      <Col className='shopping-cart'>
+                        <h6>Select An Option</h6>
+                        <Form.Control
+                          as="select"
+                          value={ qty }
+                          onChange={ ( e ) => setQty( e.target.value ) }>
+
+                          {
+                            [ ...Array( product.countInStock ).keys() ].map( ( x ) => (
+                              <option key={ x + 1 } value={ x + 1 }>
+                                {x + 1 }
+                              </option>
+                            ) )
+                          }
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                
+                ) : <Message variant='danger' classnames='text-center'>Out Of Stock</Message>}
+
 
             </ListGroup>
           </Col>
