@@ -1,18 +1,15 @@
-from django.http import JsonResponse
+from base.models import Product
+from base.serializers import ProductSerializer
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-
-from .models import Product
-from .products import products
-from .serializers import ProductSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-# Create your views here.
-@api_view(['GET'])
-def getRoutes(request):
-    return Response('Hello')
-
+# Products
 @api_view(['GET'])
 def getProducts(request):
     products = Product.objects.all()
