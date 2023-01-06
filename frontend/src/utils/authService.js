@@ -3,7 +3,7 @@
     THIS IS MEANT TO EMMULATE AN AUTHENTICATION PROCESS 
     import axios from 'axios'
 */
-let jwtExpireTimer = 30,
+let jwtExpireTimer = 300,
 validJWT = 'UumLXJkwpnMzHVm9gDITl7L3H1vD41nPKWIFdgNWAm4yjq56llvOqBkmLddBClaIzeNzUssAxCumzjh5kJeaRRw9cKrcGjhv80lC'
 class Auth {
 

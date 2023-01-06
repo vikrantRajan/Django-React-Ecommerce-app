@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
@@ -91,20 +90,20 @@ function CartPage () {
             </ListGroup>
           ) }
       </Col>
-      <Col md={ 4 }>
-        <Card>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
+      <Col md={ 4 } className='mt-5'>
+        
+          <ListGroup as='div'  className='p-5 bg-light'>
+            <ListGroup.Item className='p-5 bg-light text-dark'>
               <h4>Subtotal ({cart.reduce((acc, item) => acc + item.qty, 0)}) Items</h4>
               <h6 className='mt-2'>${cart.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</h6>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <Button type='button' className='bg-dark btn-block' disabled={cart.length===0} onClick={checkOut}>
+            <ListGroup.Item className='m-0 p-0 d-grid bg-light text-dark'>
+              <Button type='button' className='bg-dark text-light' disabled={cart.length===0} onClick={checkOut}>
                Proceed To Checkout
               </Button>
             </ListGroup.Item>
           </ListGroup>
-        </Card>
+
       </Col>
     </Row>
   )

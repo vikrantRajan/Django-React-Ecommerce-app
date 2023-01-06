@@ -1,0 +1,8 @@
+.nav-item {
+    margin: 0 10px;
+    transition: all ease-out 0.5s !important;
+    &:hover {
+        transform: scale(1.1);
+        color: yellow!important;
+    }
+}

@@ -4,14 +4,15 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { LinkContainer } from 'react-router-bootstrap';
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-white.png";
+import '../styles/header.scss';
 const Header = () => {
   return (
     <header>
-      <Navbar bg="light" variant="light" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <LinkContainer to="/">
-            <Navbar.Brand ><img alt='vikrant rajan logo' src={ logo } /></Navbar.Brand>
+            <Navbar.Brand ><img alt='vikrant rajan logo' src={ logo } style={{width: '25px'}} /></Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -20,14 +21,15 @@ const Header = () => {
               style={ { maxHeight: '100px' } }
               navbarScroll
             >
-            <LinkContainer to="/">
+            <LinkContainer to="/" className='nav-item'>
+            
               <Nav.Link>Shop</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/cart">
-              <Nav.Link className="ml-4" href="/cart"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
+            <LinkContainer to="/cart" className='nav-item'>
+              <Nav.Link  href="/cart"><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login">
-              <Nav.Link className="ml-4" href="/login"><i className="fas fa-user"></i> Login</Nav.Link>
+            <LinkContainer to="/login" className='nav-item'>
+              <Nav.Link href="/login"><i className="fas fa-user"></i> Login</Nav.Link>
             </LinkContainer>
 
                 
